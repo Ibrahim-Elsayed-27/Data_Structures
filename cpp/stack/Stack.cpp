@@ -1,4 +1,4 @@
-#include "SinglyLinked.hpp"
+#include "Stack.hpp"
 
 
 // Constructor
@@ -162,3 +162,38 @@ std::ostream& operator<<(std::ostream& os, const SinglyLinkedList<U>& list){
     os << "nullptr"; // Indicate the end of the list
     return os;
 }
+
+template <typename T>
+void Stack<T>::push(const T& value){
+    stack_list.insert_at_head(value);
+}
+
+template <typename T>
+T Stack<T>::pop(){
+    if (isEmpty()) {
+        throw std::underflow_error("Stack is empty. Cannot pop.");
+    }
+    T top = peek();
+    stack_list.delete_at_head();
+    return top;
+}
+
+template <typename T>
+T Stack<T>::peek(){
+    if (isEmpty()) {
+        throw std::underflow_error("Stack is empty. Cannot peek.");
+    }
+    return stack_list.get_head()->val;
+}
+
+template <typename T>
+bool Stack<T>::isEmpty(){
+    return (stack_list.get_size() == 0);
+}
+// Overload << operator for printing the stack
+template <typename U>
+std::ostream& operator<<(std::ostream& os, const Stack<U>& stack) {
+    os << stack.stack_list; // Delegate to SinglyLinkedList's operator<<
+    return os;
+}
+

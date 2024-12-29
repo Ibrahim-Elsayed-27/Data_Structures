@@ -1,5 +1,5 @@
-#ifndef SINGLY_LINKED
-#define SINGLY_LINKED
+#ifndef STACK_H_
+#define STACK_H_
 
 #include <stdexcept>  
 #include <memory>
@@ -47,6 +47,27 @@ template <typename T>  class SinglyLinkedList{
 };
 
 
+
+template <typename T>  class Stack{
+    private:
+        SinglyLinkedList<T> stack_list;
+    public:
+        // Constructor
+        Stack(){}
+        // Push
+        void push(const T&value);
+        // Pop
+        T pop();
+        // Peek
+        T peek();
+        // isEmpty
+        bool isEmpty();
+        // Display the stack
+        template <typename U>
+        friend std::ostream& operator<<(std::ostream& os, const Stack<U>& list);
+
+         
+};
 
 
 #endif
