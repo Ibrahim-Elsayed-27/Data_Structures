@@ -11,6 +11,8 @@ template <typename T> class Node{
 
         // Constructor
         Node(const T& value);
+        // Copy Constructor
+        Node(const Node<T>& other);
 };
 
 
@@ -21,6 +23,8 @@ template <typename T>  class SinglyLinkedList{
     public:
         // Constructor
         SinglyLinkedList(){}
+        // Copy Constructor
+        SinglyLinkedList(const SinglyLinkedList<T> & other);
         //Getter for head
         Node<T>* get_head();
         // Insert at beginning

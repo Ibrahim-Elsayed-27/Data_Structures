@@ -3,35 +3,41 @@
 #include <iostream>
 
 int main() {
-    // Create a singly linked list of integers
+    // Test Node copy constructor
+    std::cout << "Testing Node Copy Constructor:" << std::endl;
+    Node<int> a(10);
+    a.next = std::make_shared<Node<int>>(20);
+    Node<int> b = a; // Invoke copy constructor
+    std::cout << "Original Node: Value = " << a.val << ", Next Value = " << (a.next ? a.next->val : -1) << std::endl;
+    std::cout << "Copied Node: Value = " << b.val << ", Next Value = " << (b.next ? b.next->val : -1) << std::endl;
+
+    // Modify the copied node to check independence
+    b.next->val = 30;
+    std::cout << "After Modifying Copied Node:" << std::endl;
+    std::cout << "Original Node: Value = " << a.val << ", Next Value = " << (a.next ? a.next->val : -1) << std::endl;
+    std::cout << "Copied Node: Value = " << b.val << ", Next Value = " << (b.next ? b.next->val : -1) << std::endl;
+
+    // Test SinglyLinkedList copy constructor
+    std::cout << "\nTesting SinglyLinkedList Copy Constructor:" << std::endl;
     SinglyLinkedList<int> list;
 
     // Insert elements
     list.insert_at_head(10);
     list.insert_at_head(20);
     list.insert_at_end(30);
-    list.insert_at_end(40);
-    list.insert_at_index(2, 25); // Insert 25 at index 2
 
-    // Display the list
-    std::cout << "List after insertions: " << list << std::endl;
+    // Display the original list
+    std::cout << "Original List: " << list << std::endl;
 
-    // Delete elements
-    list.delete_at_head(); // Remove 20
-    list.delete_at_end();  // Remove 40
-    list.delete_at_index(1); // Remove 25 at index 1
+    // Copy the list
+    SinglyLinkedList<int> copiedList = list; // Invoke copy constructor
+    std::cout << "Copied List: " << copiedList << std::endl;
 
-    // Display the list after deletions
-    std::cout << "List after deletions: " << list << std::endl;
-
-    // Search for a value
-    int searchValue = 10;
-    auto foundNode = list.search_by_value(searchValue);
-    if (foundNode) {
-        std::cout << "Value " << searchValue << " found in the list." << std::endl;
-    } else {
-        std::cout << "Value " << searchValue << " not found in the list." << std::endl;
-    }
+    // Modify the original list to check independence
+    list.insert_at_head(40);
+    list.insert_at_end(50);
+    std::cout << "Modified Original List: " << list << std::endl;
+    std::cout << "Unchanged Copied List: " << copiedList << std::endl;
 
     return 0;
 }

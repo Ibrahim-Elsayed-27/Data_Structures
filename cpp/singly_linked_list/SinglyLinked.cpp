@@ -5,9 +5,28 @@
 template <typename T>
 Node<T>::Node(const T& value) : val(value), next(nullptr) {}
 
+// Copy Constructor
+template <typename T>
+Node<T>::Node(const Node<T>& other): 
+            val(other.val), next(other.next ? std::make_shared<Node<T>>(*(other.next)) : nullptr){}
 
 
 
+
+// Copy Constructor
+template <typename T>
+SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T> & other) : head(other.head ? std::make_shared<Node<T>>(*(other.head)) : nullptr){
+    if (head != nullptr){
+        std::shared_ptr<Node<T>> my_temp = head;
+        std::shared_ptr<Node<T>> other_temp = other.head;
+        while(other_temp->next != nullptr){
+            my_temp->next =  ( other_temp->next ? std::make_shared<Node<T>>(*(other_temp->next)) : nullptr);
+            my_temp = my_temp->next;
+            other_temp = other_temp->next;
+        }
+    }
+    
+}
 
 // Get head
 template <typename T>
