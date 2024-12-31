@@ -13,19 +13,23 @@ Node<T>::Node(const Node<T>& other):
 
 
 
+// Constructor
+template <typename T>
+SinglyLinkedList<T>::SinglyLinkedList() : size(0), head(nullptr) {}
+
 // Copy Constructor
 template <typename T>
-SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T> & other) : head(other.head ? std::make_shared<Node<T>>(*(other.head)) : nullptr){
-    if (head != nullptr){
+SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T>& other)
+    : head(other.head ? std::make_shared<Node<T>>(*(other.head)) : nullptr), size(other.size) {
+    if (head != nullptr) {
         std::shared_ptr<Node<T>> my_temp = head;
         std::shared_ptr<Node<T>> other_temp = other.head;
-        while(other_temp->next != nullptr){
-            my_temp->next =  ( other_temp->next ? std::make_shared<Node<T>>(*(other_temp->next)) : nullptr);
+        while (other_temp->next != nullptr) {
+            my_temp->next = std::make_shared<Node<T>>(*(other_temp->next));
             my_temp = my_temp->next;
             other_temp = other_temp->next;
         }
     }
-    
 }
 
 // Get head

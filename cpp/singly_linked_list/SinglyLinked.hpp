@@ -22,7 +22,7 @@ template <typename T>  class SinglyLinkedList{
         int size;
     public:
         // Constructor
-        SinglyLinkedList(){}
+        SinglyLinkedList(); 
         // Copy Constructor
         SinglyLinkedList(const SinglyLinkedList<T> & other);
         //Getter for head
