@@ -82,6 +82,27 @@ int main() {
     oss << copiedList;
     assert(oss.str() == "20 -> 30 -> nullptr");
 
+    // Test move constructor
+    SinglyLinkedList<int> movedList(std::move(list));
+    assert(movedList.get_size() == 3); // All elements transferred to movedList
+    assert(list.get_size() == 0);      // Original list is now empty
+    assert(movedList.get_head()->val == 10); // Verify the head of movedList
+
+    // Ensure movedList is still functional
+    movedList.insert_at_end(40);
+    assert(movedList.get_size() == 4);
+    oss.str("");
+    oss << movedList;
+    assert(oss.str() == "10 -> 20 -> 30 -> 40 -> nullptr");
+
+    // Ensure list (moved-from) behaves as an empty list
+    try {
+        list.delete_at_head();
+        assert(false); // Should not reach here
+    } catch (const std::underflow_error& e) {
+        assert(true);
+    }
+
     std::cout << "All tests passed successfully!" << std::endl;
 
     return 0;

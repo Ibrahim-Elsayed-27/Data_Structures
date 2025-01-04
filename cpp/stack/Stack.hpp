@@ -11,6 +11,8 @@ template <typename T> class Node{
 
         // Constructor
         Node(const T& value);
+        // Copy Constructor
+        Node(const Node<T>& other);
 };
 
 
@@ -20,9 +22,13 @@ template <typename T>  class SinglyLinkedList{
         int size;
     public:
         // Constructor
-        SinglyLinkedList(){}
+        SinglyLinkedList(); 
+        // Copy Constructor
+        SinglyLinkedList(const SinglyLinkedList<T> & other);
+        // Move Constructor
+        SinglyLinkedList(SinglyLinkedList<T> && other);
         //Getter for head
-        Node<T>* get_head();
+        Node<T>* get_head() const;
         // Insert at beginning
         void insert_at_head(const T& value);
         // Insert at End
@@ -36,9 +42,9 @@ template <typename T>  class SinglyLinkedList{
         // delete at index
         void delete_at_index(int index);
         // Search by value
-        std::shared_ptr<Node<T>> search_by_value(const T& value);
+        std::shared_ptr<Node<T>> search_by_value(const T& value) const;
         // Get the size 
-        int get_size();
+        int get_size() const;
         // Display the list
         template <typename U>
         friend std::ostream& operator<<(std::ostream& os, const SinglyLinkedList<U>& list);
@@ -47,13 +53,16 @@ template <typename T>  class SinglyLinkedList{
 };
 
 
-
 template <typename T>  class Stack{
     private:
         SinglyLinkedList<T> stack_list;
     public:
         // Constructor
-        Stack(){}
+        Stack();
+        // Copy Constructor
+        Stack(const Stack<T> & other);
+        // Move Constructor
+        Stack( Stack<T> && other);
         // Push
         void push(const T&value);
         // Pop

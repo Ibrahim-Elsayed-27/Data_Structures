@@ -25,8 +25,10 @@ template <typename T>  class SinglyLinkedList{
         SinglyLinkedList(); 
         // Copy Constructor
         SinglyLinkedList(const SinglyLinkedList<T> & other);
+        // Move Constructor
+        SinglyLinkedList(SinglyLinkedList<T> && other);
         //Getter for head
-        Node<T>* get_head();
+        Node<T>* get_head() const;
         // Insert at beginning
         void insert_at_head(const T& value);
         // Insert at End
@@ -40,9 +42,9 @@ template <typename T>  class SinglyLinkedList{
         // delete at index
         void delete_at_index(int index);
         // Search by value
-        std::shared_ptr<Node<T>> search_by_value(const T& value);
+        std::shared_ptr<Node<T>> search_by_value(const T& value) const;
         // Get the size 
-        int get_size();
+        int get_size() const;
         // Display the list
         template <typename U>
         friend std::ostream& operator<<(std::ostream& os, const SinglyLinkedList<U>& list);

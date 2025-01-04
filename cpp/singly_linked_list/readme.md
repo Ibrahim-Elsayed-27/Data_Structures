@@ -29,16 +29,36 @@ A template-based implementation of a singly linked list supporting the following
 - Get the current size of the list.
 
 #### Additional Features:
-- Deep copy constructor for duplicating lists without shared memory references.
+- **Deep Copy Constructor**: Duplicates lists without shared memory references.
+- **Move Constructor**: Transfers ownership of resources from one list to another.
 - Overloaded `<<` operator for easy list printing in the format:  
-  ```
+  ``` 
   10 -> 20 -> 30 -> nullptr
   ```
 
-### 3. **Test Suite**
+### 3. **Move Constructor**
+The implementation supports a move constructor to transfer ownership of resources from one list to another efficiently, avoiding deep copying. 
+
+#### Key Benefits:
+- Moves all elements from the source list to the destination list.
+- Leaves the source list empty and ready for safe reuse.
+
+#### Example:
+```cpp
+SinglyLinkedList<int> list1;
+list1.insert_at_end(10);
+list1.insert_at_end(20);
+
+SinglyLinkedList<int> list2(std::move(list1));
+// list2 now contains: 10 -> 20 -> nullptr
+// list1 is empty: nullptr
+```
+
+### 4. **Test Suite**
 - The `SinglyTest.cpp` file contains extensive tests using `assert` to verify:
   - Proper functioning of all operations (insertions, deletions, search, etc.).
   - Deep copy correctness (no shared memory between copied lists).
+  - Move constructor behavior (ownership transfer and source list reset).
   - List integrity after modifications.
 
 ## Implementation Details
@@ -52,8 +72,8 @@ The project uses `std::shared_ptr` for:
 ### Template-Based Design
 - The `SinglyLinkedList` class is templated, allowing it to store any data type (`int`, `float`, custom objects, etc.).
 
-### Copy Constructor
-- Ensures a **deep copy**, creating independent nodes for the new list. Modifications to one list do not affect the other.
+### Move Constructor
+The move constructor transfers ownership of the linked list from one instance to another, ensuring efficient memory operations. After the move, the source list is left in an empty state.
 
 ## File Structure
 
@@ -132,6 +152,17 @@ SinglyLinkedList<int> list2 = list; // Creates a deep copy
 list.insert_at_end(30);
 std::cout << list;  // Outputs: 5 -> 10 -> 20 -> 30 -> nullptr
 std::cout << list2; // Outputs: 5 -> 10 -> 20 -> nullptr
+```
+
+### Move Constructor
+```cpp
+SinglyLinkedList<int> list1;
+list1.insert_at_end(10);
+list1.insert_at_end(20);
+
+SinglyLinkedList<int> list2(std::move(list1));
+// list2 now contains: 10 -> 20 -> nullptr
+// list1 is empty: nullptr
 ```
 
 ## Key Considerations

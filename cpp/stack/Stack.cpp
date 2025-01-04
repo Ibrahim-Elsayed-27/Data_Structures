@@ -5,13 +5,44 @@
 template <typename T>
 Node<T>::Node(const T& value) : val(value), next(nullptr) {}
 
+// Copy Constructor
+template <typename T>
+Node<T>::Node(const Node<T>& other): 
+            val(other.val), next(other.next ? std::make_shared<Node<T>>(*(other.next)) : nullptr){}
 
 
+
+
+// Constructor
+template <typename T>
+SinglyLinkedList<T>::SinglyLinkedList() : size(0), head(nullptr) {}
+
+// Copy Constructor
+template <typename T>
+SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T>& other)
+    : head(other.head ? std::make_shared<Node<T>>(*(other.head)) : nullptr), size(other.size) {
+    if (head != nullptr) {
+        std::shared_ptr<Node<T>> my_temp = head;
+        std::shared_ptr<Node<T>> other_temp = other.head;
+        while (other_temp->next != nullptr) {
+            my_temp->next = std::make_shared<Node<T>>(*(other_temp->next));
+            my_temp = my_temp->next;
+            other_temp = other_temp->next;
+        }
+    }
+}
+
+// Move Constructor
+template <typename T>
+SinglyLinkedList<T>::SinglyLinkedList(SinglyLinkedList<T> && other): head(other.head), size(other.size){
+    other.head = nullptr;
+    other.size = 0;
+}
 
 
 // Get head
 template <typename T>
-Node<T>* SinglyLinkedList<T>::get_head(){
+Node<T>* SinglyLinkedList<T>::get_head() const{
     if (head == nullptr) {
         throw std::out_of_range("List is empty");
     }
@@ -132,7 +163,7 @@ void SinglyLinkedList<T>::delete_at_index(int index) {
 
 // Search by value
 template <typename T>
-std::shared_ptr<Node<T>> SinglyLinkedList<T>::search_by_value(const T& value) {
+std::shared_ptr<Node<T>> SinglyLinkedList<T>::search_by_value(const T& value) const{
     std::shared_ptr<Node<T>> iter = head;
     while (iter != nullptr) {
         if (iter->val == value) {
@@ -146,7 +177,7 @@ std::shared_ptr<Node<T>> SinglyLinkedList<T>::search_by_value(const T& value) {
 
 // Getter for size of the list
 template <typename T>
-int SinglyLinkedList<T>::get_size(){
+int SinglyLinkedList<T>::get_size() const{
     return size;
 }
 
@@ -162,6 +193,23 @@ std::ostream& operator<<(std::ostream& os, const SinglyLinkedList<U>& list){
     os << "nullptr"; // Indicate the end of the list
     return os;
 }
+
+
+
+
+// Constructor
+template <typename T>
+Stack<T>::Stack(){}
+
+
+// Copy Constructor
+template <typename T>
+Stack<T>::Stack(const Stack<T> & other): stack_list(other.stack_list){}
+
+
+// Move Constructor
+template <typename T>
+Stack<T>::Stack( Stack<T> && other): stack_list(std::move(other.stack_list)){}
 
 template <typename T>
 void Stack<T>::push(const T& value){

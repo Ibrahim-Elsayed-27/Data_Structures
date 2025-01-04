@@ -32,9 +32,17 @@ SinglyLinkedList<T>::SinglyLinkedList(const SinglyLinkedList<T>& other)
     }
 }
 
+
+// Move Constructor
+template <typename T>
+SinglyLinkedList<T>::SinglyLinkedList(SinglyLinkedList<T> && other): head(other.head), size(other.size){
+    other.head = nullptr;
+    other.size = 0;
+}
+
 // Get head
 template <typename T>
-Node<T>* SinglyLinkedList<T>::get_head(){
+Node<T>* SinglyLinkedList<T>::get_head() const{
     if (head == nullptr) {
         throw std::out_of_range("List is empty");
     }
@@ -155,7 +163,7 @@ void SinglyLinkedList<T>::delete_at_index(int index) {
 
 // Search by value
 template <typename T>
-std::shared_ptr<Node<T>> SinglyLinkedList<T>::search_by_value(const T& value) {
+std::shared_ptr<Node<T>> SinglyLinkedList<T>::search_by_value(const T& value) const{
     std::shared_ptr<Node<T>> iter = head;
     while (iter != nullptr) {
         if (iter->val == value) {
@@ -169,7 +177,7 @@ std::shared_ptr<Node<T>> SinglyLinkedList<T>::search_by_value(const T& value) {
 
 // Getter for size of the list
 template <typename T>
-int SinglyLinkedList<T>::get_size(){
+int SinglyLinkedList<T>::get_size() const{
     return size;
 }
 
