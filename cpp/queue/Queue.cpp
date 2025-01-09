@@ -1,4 +1,4 @@
-#include "Stack.hpp"
+#include "Queue.hpp"
 
 
 // Constructor
@@ -199,27 +199,27 @@ std::ostream& operator<<(std::ostream& os, const SinglyLinkedList<U>& list){
 
 // Constructor
 template <typename T>
-Stack<T>::Stack(){}
+Queue<T>::Queue(){}
 
 
 // Copy Constructor
 template <typename T>
-Stack<T>::Stack(const Stack<T> & other): stack_list(other.stack_list){}
+Queue<T>::Queue(const Queue<T> & other): stack_list(other.stack_list){}
 
 
 // Move Constructor
 template <typename T>
-Stack<T>::Stack( Stack<T> && other): stack_list(std::move(other.stack_list)){}
+Queue<T>::Queue( Queue<T> && other): stack_list(std::move(other.stack_list)){}
 
 template <typename T>
-void Stack<T>::push(const T& value){
-    stack_list.insert_at_head(value);
+void Queue<T>::enqueue(const T& value){
+    stack_list.insert_at_end(value);
 }
 
 template <typename T>
-T Stack<T>::pop(){
+T Queue<T>::dequeue(){
     if (isEmpty()) {
-        throw std::underflow_error("Stack is empty. Cannot pop.");
+        throw std::underflow_error("Queue is empty. Cannot dequeue.");
     }
     T top = peek();
     stack_list.delete_at_head();
@@ -227,20 +227,20 @@ T Stack<T>::pop(){
 }
 
 template <typename T>
-T Stack<T>::peek() const{
+T Queue<T>::peek() const{
     if (isEmpty()) {
-        throw std::underflow_error("Stack is empty. Cannot peek.");
+        throw std::underflow_error("Queue is empty. Cannot peek.");
     }
     return stack_list.get_head()->val;
 }
 
 template <typename T>
-bool Stack<T>::isEmpty() const{
+bool Queue<T>::isEmpty() const{
     return (stack_list.get_size() == 0);
 }
 // Overload << operator for printing the stack
 template <typename U>
-std::ostream& operator<<(std::ostream& os, const Stack<U>& stack) {
+std::ostream& operator<<(std::ostream& os, const Queue<U>& stack) {
     os << stack.stack_list; // Delegate to SinglyLinkedList's operator<<
     return os;
 }

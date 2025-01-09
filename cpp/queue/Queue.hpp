@@ -1,5 +1,5 @@
-#ifndef STACK_H_
-#define STACK_H_
+#ifndef QUEUE_H_
+#define QUEUE_H_
 
 #include <stdexcept>  
 #include <memory>
@@ -53,27 +53,27 @@ template <typename T>  class SinglyLinkedList{
 };
 
 
-template <typename T>  class Stack{
+template <typename T>  class Queue{
     private:
         SinglyLinkedList<T> stack_list;
     public:
         // Constructor
-        Stack();
+        Queue();
         // Copy Constructor
-        Stack(const Stack<T> & other);
+        Queue(const Queue<T> & other);
         // Move Constructor
-        Stack( Stack<T> && other);
-        // Push
-        void push(const T&value);
+        Queue( Queue<T> && other);
+        // Enqueue
+        void enqueue(const T&value);
         // Pop
-        T pop();
+        T dequeue();
         // Peek
         T peek() const;
         // isEmpty
         bool isEmpty() const;
         // Display the stack
         template <typename U>
-        friend std::ostream& operator<<(std::ostream& os, const Stack<U>& list);
+        friend std::ostream& operator<<(std::ostream& os, const Queue<U>& list);
 
          
 };

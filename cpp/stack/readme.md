@@ -2,7 +2,7 @@
 
 This project provides a comprehensive implementation of a **generic stack data structure** in C++ using a **singly linked list**. Designed for flexibility and safety, the implementation leverages modern C++ features like templates and exception handling to ensure robust functionality.
 
-
+---
 
 ## Features
 
@@ -30,7 +30,7 @@ This project provides a comprehensive implementation of a **generic stack data s
   ```
 
 
-
+---
 ## Classes Overview
 
 ### `Node<T>`
@@ -55,7 +55,7 @@ The main stack class built on top of `SinglyLinkedList`.
 - Overloaded `<<` operator for printing stack contents.
 
 
-
+---
 ## File Structure
 
 - `Stack.hpp`: Contains definitions for `Node`, `SinglyLinkedList`, and `Stack` classes.
@@ -66,7 +66,7 @@ The main stack class built on top of `SinglyLinkedList`.
 - `README.md`: Project documentation (this file).
 
 
-
+---
 ## Compilation and Usage
 
 ### Prerequisites
@@ -106,7 +106,7 @@ The main stack class built on top of `SinglyLinkedList`.
   ```
 
 
-
+---
 ## Example Usage
 
 ### Stack Operations
@@ -134,7 +134,7 @@ int main() {
 ```
 
 
-
+---
 ## Testing
 
 ### Key Test Cases
